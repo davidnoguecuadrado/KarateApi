@@ -1,5 +1,4 @@
 ﻿using Context;
-using DataLayer.Interface;
 using Domain;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Text;
 
 namespace DataLayer.Service
 {
-    public class DataCasa : IDataCasa
+    public class DataCasa 
     {
         private IContextDb _context;
 
@@ -17,36 +16,47 @@ namespace DataLayer.Service
             _context = context;
         }
 
-        public Casa GetCasa(int id)
+        public bool GetCasa(int id)
         {
-            return _context.Casa.Where(x => x.CompradorID == id).Single();
+            return true;
+            //return _context.Casa.Where(x => x.CompradorID == id).Single();
         }
 
-        public List<Casa> GetCasa()
-        {   
-            return _context.Casa.ToList();
+        public bool GetCasa()
+        {
+            return true;
+            //return _context.Casa.ToList();
         }
 
 
-        public Casa DeleteCasa(Casa casa)
+        public bool DeleteCasa( )//Casa casa)
         {
+            return true;
+               /*
             _context.Casa.Remove(casa);
             _context.SaveChanges();
             return casa;
+               */
         }
 
-        public Casa UpdateCasa(Casa casa)
+        public bool UpdateCasa()//Casa casa)
          {
+            return true;
+            /*
             _context.Casa.Update(casa);
             _context.SaveChanges();
             return casa;
+           */
         }
 
-        public Casa AddCasa(Casa casa)
+        public bool AddCasa()//Casa casa)
         {
+            return true;
+            /*
             _context.Casa.Add(casa);
             _context.SaveChanges();
             return casa;
+            */
         }
     }
 }

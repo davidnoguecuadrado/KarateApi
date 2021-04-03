@@ -7,11 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Context;
 
-using DataLayer.Service;
-using DataLayer.Interface;
 
-using AplicationLayer.Service;
-using AplicationLayer.Inteface;
 
 using System;
 using DTOLayer.Mapper;
@@ -35,11 +31,9 @@ namespace PresentationLayer
             services.AddControllers();
 
             //Aqui se añade la injeccion de dependencias
-            services.AddTransient<ICasaAplication, CasaAplication>();
-            services.AddTransient<IDataCasa, DataCasa>();
+            //services.AddTransient<ICasaAplication, CasaAplication>();
+            //services.AddTransient<IDataCasa, DataCasa>();
 
-            services.AddTransient<IComparadorAplication, ComparadorAplication>();
-            services.AddTransient<IDataComprador, DataComprador>();
             
             services.AddTransient<IContextDb, Contex>();
 

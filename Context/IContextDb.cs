@@ -10,8 +10,19 @@ namespace Context
 {
     public interface IContextDb
     {
-        DbSet<Casa> Casa { get; set; }
-        DbSet<Comprador> Comprador { get; set; }
+        DbSet<Usuario> Usuario { get; set; }
+        DbSet<Deportista> Deportista { get; set; }
+        DbSet<Club> Club { get; set; }
+        DbSet<DeportistaClub> Invitacion { get; set; }
+        DbSet<DeportistasBaneados> DeportistasBaneados { get; set; }
+        DbSet<Categorias> Categorias { get; set; }
+        DbSet<ClubCategoria> ClubCategoria { get; set; }
+        DbSet<Video> Video { get; set; }
+        DbSet<Nivel> Nivel { get; set; }
+        DbSet<DeportistasNiveles> DeportistasNiveles { get; set; }
+        DbSet<Contenido> Contenido { get; set; }
+        DbSet<ContenidoVideo> ContenidoVideo { get; set; }
+        DbSet<Invitaciones> Invitaciones { get; set; }
 
         int SaveChanges();
 
