@@ -13,7 +13,7 @@ namespace Context
         DbSet<Usuario> Usuario { get; set; }
         DbSet<Deportista> Deportista { get; set; }
         DbSet<Club> Club { get; set; }
-        DbSet<DeportistaClub> Invitacion { get; set; }
+        DbSet<DeportistaClub> DeportistaClub { get; set; }
         DbSet<DeportistasBaneados> DeportistasBaneados { get; set; }
         DbSet<Categorias> Categorias { get; set; }
         DbSet<ClubCategoria> ClubCategoria { get; set; }

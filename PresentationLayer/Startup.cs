@@ -13,6 +13,10 @@ using System;
 using DTOLayer.Mapper;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using AplicationLayer.Service;
+using AplicationLayer.Inteface;
+using DataLayer.Interface;
+using DataLayer.Service;
 
 namespace PresentationLayer
 {
@@ -31,10 +35,52 @@ namespace PresentationLayer
             services.AddControllers();
 
             //Aqui se añade la injeccion de dependencias
-            //services.AddTransient<ICasaAplication, CasaAplication>();
-            //services.AddTransient<IDataCasa, DataCasa>();
+            services.AddTransient<ICategoriasAplication, CategoriasAplication>();
+            services.AddTransient<ICategoriasData, CategoriasData>();
+
+            services.AddTransient<ICategoriasAplication, CategoriasAplication>();
+            services.AddTransient<ICategoriasData, CategoriasData>();
+            
+            services.AddTransient<IClubAplication, ClubAplication>();
+            services.AddTransient<IClubData, ClubData>();
+
+            services.AddTransient<IClubCategoriaAplication, ClubCategoriaAplication>();
+            services.AddTransient<IClubCategoriaData, ClubCategoriaData>();
+
+            services.AddTransient<IContenidoAplication, ContenidoAplication>();
+            services.AddTransient<IContenidoData, ContenidoData>();
+
+
+
+            services.AddTransient<IContenidoVideoAplication, ContenidoVideoAplication>();
+            services.AddTransient<IContenidoVideoData, ContenidoVideoData>();
+
+            services.AddTransient<IDeportistaClubData, DeportistaClubData>();
+            services.AddTransient<IDeportistaClubAplication, DeportistaClubAplication>();
+
+            services.AddTransient<IDeportistaData, DeportistaData>();
+            services.AddTransient<IDeportistaAplication, DeportistaAplication>();
+
+            services.AddTransient<IDeportistasBaneadosData, DeportistasBaneadosData>();
+            services.AddTransient<IDeportistasBaneadosAplication,DeportistasBaneadosAplication>();
+
+            services.AddTransient<IDeportistasNivelesData, DeportistasNivelesData>();
+            services.AddTransient<IDeportistasNivelesAplication, DeportistasNivelesAplication>();
+
+            services.AddTransient<IInvitacionesData, InvitacionesData>();
+            services.AddTransient<IInvitacionesAplication, InvitacionesAplication>();
+
+            services.AddTransient<INivelData, NivelData>();
+            services.AddTransient<INivelAplication, NivelAplication>();
+
+            services.AddTransient<IUsuarioData, UsuarioData>();
+            services.AddTransient<IUsuarioAplication, UsuarioAplication>();
+
+            services.AddTransient<IVideoData, VideoData>();
 
             
+
+
             services.AddTransient<IContextDb, Contex>();
 
             
