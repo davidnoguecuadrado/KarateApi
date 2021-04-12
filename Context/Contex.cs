@@ -19,7 +19,7 @@ namespace Context
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Deportista> Deportista { get; set; }
         public DbSet<Club> Club { get; set; }
-        public DbSet<DeportistaClub> Invitacion { get; set; }
+        public DbSet<DeportistaClub> DeportistaClub { get; set; }
         public DbSet<DeportistasBaneados> DeportistasBaneados { get; set; }
         public DbSet<Categorias> Categorias { get; set; }
         public DbSet<ClubCategoria> ClubCategoria { get; set; }
