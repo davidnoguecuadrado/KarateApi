@@ -1,6 +1,8 @@
 ﻿using AplicationLayer.Inteface;
 using AutoMapper;
 using Domain;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +14,7 @@ namespace PresentationLayer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class UsuarioController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -21,6 +24,9 @@ namespace PresentationLayer.Controllers
             _mapper = mapper;
             _usuarioAplication = usuarioAplication;
         }
+
+        [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
         public List<UsuarioDTO> Get()
         {
@@ -33,6 +39,8 @@ namespace PresentationLayer.Controllers
 
         // GET api/<ContenidoController>/5
         [HttpGet("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         public UsuarioDTO Get(int id)
         {
             var categoria = _usuarioAplication.Get(id);
@@ -50,6 +58,8 @@ namespace PresentationLayer.Controllers
 
         // PUT api/<ContenidoController>/5
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         public void Put(int id, [FromBody] string value)
         {
             var categoria = _mapper.Map<Usuario>(value);
@@ -59,6 +69,8 @@ namespace PresentationLayer.Controllers
 
         // DELETE api/<ContenidoController>/5
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         public void Delete(int id)
         {
             _usuarioAplication.Delete(id);

@@ -24,6 +24,7 @@ namespace PresentationLayer.Controllers
             _deportistaClubAplication = deportistaClubAplication;
         }
 
+        [HttpGet]
         public List<DeportistaClubDTO> Get()
         {
 

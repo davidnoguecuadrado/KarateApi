@@ -2,6 +2,8 @@
 using AutoMapper;
 using Domain;
 using DTOLayer.DtoClasses;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,8 @@ namespace PresentationLayer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
     public class ContenidoVideoController : ControllerBase
     {
 
@@ -25,6 +29,7 @@ namespace PresentationLayer.Controllers
             _contenidoVideoAplication = contenidoVideoAplication;
         }
 
+        [HttpGet]
         public List<ContenidoVideoDTO> Get()
         {
 

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PresentationLayer.JWTOptions
+namespace PresentationLayer.Configuration
 {
-    public class JwtSetting
+    public class JwtConfig
     {
         public string Secret { get; set; }
     }
