@@ -11,6 +11,7 @@ namespace DataLayer.Interface
     {
         List<Usuario> Get();
         Usuario Get(int id);
+        List<Usuario> ifExist(Usuario value);
         void Post(Usuario value);
         void Put(Usuario value);
         void Delete(Usuario id);

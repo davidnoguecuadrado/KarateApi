@@ -35,7 +35,26 @@ namespace AplicationLayer.Service
 
         public void Post(Usuario value)
         {
+            byte[] encode = new byte[value.Password.Length];
+            encode = Encoding.UTF8.GetBytes(value.Password);
+            value.Password = Convert.ToBase64String(encode);
             _usuarioData.Post(value);
+        }
+
+        public bool ifExist(Usuario value)
+        {
+
+            byte[] encode = new byte[value.Password.Length];
+            encode = Encoding.UTF8.GetBytes(value.Password);
+            value.Password = Convert.ToBase64String(encode);
+            var usr  = _usuarioData.ifExist(value);
+            if (usr.ToArray().Length != 0)
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
 
         public void Put(Usuario value)

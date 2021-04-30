@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace DTOLayer.DtoClasses
 {
-    public class DeportistasNivelesDTO
+    public class JWT
     {
-        public int ID { get; set; }
-        public int? DeportistaID { get; set; }
-        public int? NivelID { get; set; }
+        public string jwt { get; set; }
     }
 }

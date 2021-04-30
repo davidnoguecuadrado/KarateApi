@@ -124,6 +124,18 @@ namespace PresentationLayer
             new Mapper();
 
 
+            services.AddCors(options =>
+                options.AddPolicy(
+                    "AllowWebApp",
+                    builder =>
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                )
+            );
+
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddSwaggerGen(c =>
@@ -139,6 +151,10 @@ namespace PresentationLayer
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+
+            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -148,17 +164,23 @@ namespace PresentationLayer
 
             app.UseHttpsRedirection();
 
+
             app.UseRouting();
 
+            app.UseCors("AllowWebApp");
+
             app.UseAuthorization();
 
             app.UseAuthorization();
+
+           
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
+           
         }
     }
 }

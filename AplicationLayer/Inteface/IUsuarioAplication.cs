@@ -14,6 +14,7 @@ namespace AplicationLayer.Inteface
         void Post(Usuario value);
         void Put(Usuario value);
         void Delete(int id);
+        bool ifExist(Usuario value);
     }
 }
 

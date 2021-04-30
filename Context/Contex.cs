@@ -34,6 +34,7 @@ namespace Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            modelBuilder.Entity<Usuario>().HasIndex(e => e.Correo).IsUnique();
             modelBuilder.Entity<Usuario>().ToTable("Usuario");
             modelBuilder.Entity<Deportista>().ToTable("Deportista");
             modelBuilder.Entity<Club>().ToTable("Club");

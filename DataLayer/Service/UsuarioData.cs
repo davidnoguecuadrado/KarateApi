@@ -28,6 +28,10 @@ namespace DataLayer.Service
             return _context.Usuario.ToList();
         }
 
+        public List<Usuario> ifExist(Usuario value)
+        {
+                return _context.Usuario.Where(x => x.Correo.Equals(value.Correo)).Where(x => x.Password.Equals(value.Password)).ToList();
+        }
         public Usuario Get(int id)
         {
             return _context.Usuario.Where(x => x.ID == id).Single();

@@ -1,4 +1,8 @@
-﻿using Domain;
+﻿using AplicationLayer.Inteface;
+using AutoMapper;
+using Domain;
+using DTOLayer.DtoClasses;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,60 +22,77 @@ namespace PresentationLayer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowOrigin")]
     public class AuthManagmentController : ControllerBase
     {
         private readonly JwtConfig _jwtConfig;
 
+        private readonly IMapper _mapper;
+        private readonly IUsuarioAplication _usuarioAplication;
+        private JWT key;
         public AuthManagmentController( 
-                IOptionsMonitor<JwtConfig> optionsMonitor
+                IOptionsMonitor<JwtConfig> optionsMonitor,
+                IMapper mapper, 
+                IUsuarioAplication usuarioAplication
         ) {
             _jwtConfig = optionsMonitor.CurrentValue;
+            _mapper = mapper;
+            _usuarioAplication = usuarioAplication;
+            this.key = new JWT();
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody] UsuarioDTO user) 
+        public JWT Login([FromBody] UsuarioDTO user) 
         {
             if (ModelState.IsValid)
             {
                 var existingUser = true;
                 if (!existingUser) {
-                    return BadRequest("User no exist");
+                    return this.key;
                 }
                 //WE CAN utilse the model
 
-                var  jwtToken = GenerateJwtToken(user);
-                return Ok(jwtToken);
+                this.key.jwt = GenerateJwtToken(user);
+                return this.key;
 
             }
 
 
-            return BadRequest("Invalid request");
+            return this.key;
         }
 
         private string GenerateJwtToken(UsuarioDTO user) 
         {
-            var jwtTokenHandler = new JwtSecurityTokenHandler();
+            var categoria = _mapper.Map<Usuario>(user);
 
-            var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
-
-            var tokenDsecription = new SecurityTokenDescriptor
+            if (_usuarioAplication.ifExist(categoria))
             {
-                Subject = new ClaimsIdentity(new[]
+                var jwtTokenHandler = new JwtSecurityTokenHandler();
+
+                var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
+
+                var tokenDsecription = new SecurityTokenDescriptor
                 {
-                    new Claim("ID", user.ID.ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Correo),
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Correo),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                    Subject = new ClaimsIdentity(new[]
+                    {
+                        new Claim("ID", user.ID.ToString()),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Correo),
+                        new Claim(JwtRegisteredClaimNames.Sub, user.Correo),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 
-                }),
-                Expires = DateTime.UtcNow.AddHours(6),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
+                    }),
+                    Expires = DateTime.UtcNow.AddHours(6),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
 
-            var token = jwtTokenHandler.CreateToken(tokenDsecription);
-            var jwtToken = jwtTokenHandler.WriteToken(token);
+                var token = jwtTokenHandler.CreateToken(tokenDsecription);
+                var jwtToken = jwtTokenHandler.WriteToken(token);
 
-            return jwtToken;
+                return jwtToken;
+            }
+            else {
+                return "";
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using AutoMapper;
 using Domain;
 using DTOLayer.DtoClasses;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace PresentationLayer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowOrigin")]
+
     public class DeportistaClubController : ControllerBase
     {
         private readonly IMapper _mapper;
